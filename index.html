@@ -158,7 +158,7 @@
 
   <script>
     // 신청 내용을 받을 주소(Formspree, Google Apps Script 등)를 여기에 넣으면 실제로 접수돼요.
-    // 비어 있는 동안에는 접수되지 않고 안내 문구만 보여줘요.
+    // 비어 있는 동안에는 샘플 모드로, 완료 화면만 보여주고 아무것도 저장하지 않아요.
     const ENDPOINT = "";
 
     const form = document.getElementById("form");
@@ -180,7 +180,8 @@
       if (!form.agree.checked) return show("개인정보 수집에 동의해주세요.", "err");
 
       if (!ENDPOINT) {
-        return show("신청 접수 연결이 아직 설정되지 않았어요. 운영자에게 문의해주세요.", "err");
+        form.reset();
+        return show("샘플 화면이에요. 신청이 완료된 것처럼 보이지만 입력한 내용은 저장되지 않아요.", "ok");
       }
 
       btn.disabled = true;
