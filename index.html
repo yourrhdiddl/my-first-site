@@ -23,7 +23,9 @@
     body {
       margin: 0;
       font-family: -apple-system, "Segoe UI", "Noto Sans KR", sans-serif;
-      background: var(--paper);
+      background-color: var(--paper);
+      background-image: radial-gradient(var(--sky) 1.6px, transparent 1.7px);
+      background-size: 26px 26px;
       color: var(--ink);
       line-height: 1.7;
     }
@@ -36,18 +38,34 @@
       display: grid;
       gap: 32px;
       grid-template-columns: 1.1fr 0.9fr;
-      align-items: start;
+      align-items: stretch;
     }
     @media (max-width: 800px) { .wrap { grid-template-columns: 1fr; padding-top: 24px; } }
 
     /* 손그림 느낌의 카드 */
     .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
       background: #fff;
       border: 2.5px solid var(--ink);
       border-radius: 22px 18px 24px 16px / 18px 24px 16px 22px;
       box-shadow: 5px 6px 0 var(--sky-deep);
     }
-    .pad { padding: 26px 28px; }
+    .pad { padding: 26px 28px; flex: 1; }
+
+    /* 마스킹테이프 장식 */
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -13px; left: 50%;
+      width: 92px; height: 26px;
+      transform: translateX(-50%) rotate(-3deg);
+      background: rgba(185, 211, 239, 0.75);
+      border: 1.5px dashed rgba(29, 29, 31, 0.35);
+      z-index: 2;
+    }
+    #panel::before { transform: translateX(-50%) rotate(3deg); }
 
     .stage {
       background: var(--sky);
@@ -55,7 +73,40 @@
       border-radius: 19px 15px 0 0 / 15px 21px 0 0;
       padding: 18px 0 0;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
+    .sticker {
+      position: absolute; top: 16px; right: 16px;
+      transform: rotate(10deg);
+      font-family: var(--hand); font-weight: 700; font-size: 1.25rem; line-height: 1;
+      padding: 9px 12px;
+      background: #fff;
+      border: 2.5px solid var(--ink);
+      border-radius: 50%;
+      box-shadow: 2px 3px 0 var(--ink);
+      z-index: 1;
+    }
+    .drop {
+      position: absolute;
+      width: 12px; height: 12px;
+      background: var(--sky-deep);
+      border: 2px solid var(--ink);
+      border-radius: 0 50% 50% 50%;
+      transform: rotate(45deg);
+      opacity: 0;
+      animation: fall 4.5s ease-in infinite;
+    }
+    .drop.d1 { left: 14%; top: 14%; }
+    .drop.d2 { left: 80%; top: 38%; animation-delay: 1.6s; width: 10px; height: 10px; }
+    .drop.d3 { left: 26%; top: 44%; animation-delay: 3s; width: 9px; height: 9px; }
+    @keyframes fall {
+      0%   { opacity: 0; margin-top: -10px; }
+      15%  { opacity: 0.9; }
+      80%  { opacity: 0.9; }
+      100% { opacity: 0; margin-top: 70px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .drop { animation: none; opacity: 0.7; } }
     .stage img { display: block; width: min(300px, 70%); height: auto; margin: 0 auto; }
 
     .tag {
@@ -69,7 +120,11 @@
       border-radius: 999px;
       margin-bottom: 10px;
     }
-    h1 { font-family: var(--hand); font-size: clamp(2rem, 6vw, 2.7rem); line-height: 1.2; margin: 0 0 10px; }
+    h1 span {
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8' viewBox='0 0 24 8'%3E%3Cpath d='M0 4 Q6 0 12 4 T24 4' fill='none' stroke='%23b9d3ef' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x left bottom;
+      padding-bottom: 8px;
+    }
+    h1 { font-family: var(--hand); font-size: clamp(2rem, 6vw, 2.7rem); line-height: 1.25; margin: 0 0 16px; }
     h2 { font-family: var(--hand); font-size: 1.5rem; line-height: 1.3; margin: 0 0 8px; }
     p { margin: 0 0 12px; }
     .lead { color: var(--muted); }
@@ -86,10 +141,29 @@
     li { margin-bottom: 4px; }
     li::marker { color: var(--sky-deep); }
 
-    label { display: block; font-weight: 600; font-size: 0.92rem; margin: 14px 0 6px; }
+    #formView { display: flex; flex-direction: column; }
+    #formView form { flex: 1; display: flex; flex-direction: column; }
+    #formView button { margin-top: auto; }
+    #formView .agree { margin-bottom: 26px; }
+    .steps {
+      display: grid; gap: 10px;
+      margin: 16px 0 6px; padding: 14px 16px;
+      background: var(--sky);
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      font-size: 0.9rem;
+    }
+    .steps div { display: flex; align-items: center; gap: 10px; }
+    .steps b {
+      flex-shrink: 0;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: #fff; border: 2px solid var(--ink);
+      font-family: var(--hand); font-size: 1rem; line-height: 20px; text-align: center;
+    }
+    label { display: block; font-weight: 600; font-size: 0.92rem; margin: 20px 0 7px; }
     input, select {
       width: 100%;
-      padding: 10px 12px;
+      padding: 13px 14px;
       border: 2px solid var(--ink);
       border-radius: 12px;
       font: inherit;
@@ -120,7 +194,8 @@
     #err { margin-top: 12px; font-size: 0.92rem; color: var(--err); min-height: 1.3em; }
 
     /* 신청 완료 화면 */
-    .done { text-align: center; padding: 40px 28px 32px; }
+    .done { flex: 1; display: flex; flex-direction: column; justify-content: center; text-align: center; padding: 40px 28px 32px; }
+    .done button { margin-top: 20px; }
     .check {
       width: 76px; height: 76px; margin: 0 auto 14px;
       border: 2.5px solid var(--ink); border-radius: 50%;
@@ -147,11 +222,13 @@
     <!-- 이벤트 이미지 + 설명 -->
     <section class="card">
       <div class="stage">
+        <span class="sticker">FREE!</span>
+        <i class="drop d1"></i><i class="drop d2"></i><i class="drop d3"></i>
         <img src="images/mascot.png" alt="눈물을 흘리며 서 있는 손그림 강아지" width="300" height="300">
       </div>
       <div class="pad">
         <span class="tag">무료 온라인 웨비나</span>
-        <h1>웨비나 신청 페이지</h1>
+        <h1><span>웨비나 신청 페이지</span></h1>
         <p class="lead">핵심 주제와 얻어갈 내용을 한두 문장으로 소개하는 문구입니다. 누구를 위한 웨비나인지, 참여하면 무엇을 얻을 수 있는지 적어주세요.</p>
 
         <div class="meta">
@@ -178,7 +255,12 @@
       <!-- 1) 정보 입력 화면 -->
       <div class="pad" id="formView">
         <h2>참가 신청</h2>
-        <p class="lead" style="font-size:0.92rem">정보를 입력하고 신청하기를 눌러주세요.</p>
+        <p class="lead" style="font-size:0.92rem;margin-bottom:0">정보를 입력하고 신청하기를 눌러주세요.</p>
+        <div class="steps">
+          <div><b>1</b>아래 정보를 입력하고 신청해요</div>
+          <div><b>2</b>입력한 이메일로 참가 링크를 보내드려요</div>
+          <div><b>3</b>당일 시간에 맞춰 접속하면 끝!</div>
+        </div>
         <form id="form" novalidate>
           <label for="name">이름</label>
           <input id="name" name="name" type="text" autocomplete="name" required>
