@@ -47,6 +47,4 @@
 ---
 
 ## 🎶 Etc
-
-- 사용자 경험과 비즈니스 가치를 연결하는 것을 좋아합니다.
 <img width="1184" height="1184" alt="듀아아" src="https://github.com/user-attachments/assets/7858c2a7-7a8b-476e-a68f-9a5ad0c49432" />
