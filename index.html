@@ -10,13 +10,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --paper: #fbfdff;
-      --sky: #dbe9f8;
-      --sky-deep: #b9d3ef;
+      --paper: #fafafa;
+      --sky: #e8e8e8;
+      --sky-deep: #c8c8c8;
       --ink: #1d1d1f;
-      --muted: #5f6b7a;
-      --ok: #2f7d57;
-      --err: #b4382f;
+      --muted: #666666;
+      --ok: #1d1d1f;
+      --err: #1d1d1f;
       --hand: "Gaegu", "Noto Sans KR", cursive;
     }
     * { box-sizing: border-box; }
@@ -61,7 +61,7 @@
       top: -13px; left: 50%;
       width: 92px; height: 26px;
       transform: translateX(-50%) rotate(-3deg);
-      background: rgba(185, 211, 239, 0.75);
+      background: rgba(200, 200, 200, 0.8);
       border: 1.5px dashed rgba(29, 29, 31, 0.35);
       z-index: 2;
     }
@@ -71,7 +71,7 @@
       background: var(--sky);
       border-bottom: 2.5px solid var(--ink);
       border-radius: 19px 15px 0 0 / 15px 21px 0 0;
-      padding: 18px 0 0;
+      padding: 0;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -107,7 +107,7 @@
       100% { opacity: 0; margin-top: 70px; }
     }
     @media (prefers-reduced-motion: reduce) { .drop { animation: none; opacity: 0.7; } }
-    .stage img { display: block; width: min(300px, 70%); height: auto; margin: 0 auto; }
+    .stage svg { display: block; width: 100%; height: auto; }
 
     .tag {
       display: inline-block;
@@ -121,7 +121,7 @@
       margin-bottom: 10px;
     }
     h1 span {
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8' viewBox='0 0 24 8'%3E%3Cpath d='M0 4 Q6 0 12 4 T24 4' fill='none' stroke='%23b9d3ef' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x left bottom;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8' viewBox='0 0 24 8'%3E%3Cpath d='M0 4 Q6 0 12 4 T24 4' fill='none' stroke='%23c8c8c8' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x left bottom;
       padding-bottom: 8px;
     }
     h1 { font-family: var(--hand); font-size: clamp(2rem, 6vw, 2.7rem); line-height: 1.25; margin: 0 0 16px; }
@@ -136,6 +136,7 @@
       border: 2px dashed var(--sky-deep);
       border-radius: 14px;
       font-size: 0.95rem;
+      filter: grayscale(1);
     }
     ul { margin: 0 0 4px; padding-left: 20px; }
     li { margin-bottom: 4px; }
@@ -191,7 +192,7 @@
     button:hover { background: var(--sky-deep); }
     button:active { transform: translate(3px, 4px); box-shadow: 0 0 0 var(--ink); }
     button:disabled { opacity: 0.6; cursor: wait; }
-    #err { margin-top: 12px; font-size: 0.92rem; color: var(--err); min-height: 1.3em; }
+    #err { margin-top: 12px; font-size: 0.92rem; font-weight: 600; color: var(--err); min-height: 1.3em; }
 
     /* 신청 완료 화면 */
     .done { flex: 1; display: flex; flex-direction: column; justify-content: center; text-align: center; padding: 40px 28px 32px; }
@@ -224,7 +225,42 @@
       <div class="stage">
         <span class="sticker">FREE!</span>
         <i class="drop d1"></i><i class="drop d2"></i><i class="drop d3"></i>
-        <img src="images/mascot.png" alt="눈물을 흘리며 서 있는 손그림 강아지" width="300" height="300">
+        <svg viewBox="0 0 640 340" role="img" aria-label="온라인 웨비나 일러스트">
+          <rect width="640" height="340" fill="#e8e8e8"/>
+          <circle cx="570" cy="40" r="90" fill="#fff" opacity="0.55"/>
+          <circle cx="60" cy="310" r="110" fill="#fff" opacity="0.55"/>
+          <!-- 노트북 -->
+          <rect x="150" y="50" width="340" height="205" rx="14" fill="#fff" stroke="#1d1d1f" stroke-width="3"/>
+          <rect x="166" y="66" width="308" height="173" rx="8" fill="#f3f3f3" stroke="#1d1d1f" stroke-width="2"/>
+          <!-- 발표자 -->
+          <circle cx="258" cy="127" r="27" fill="#1d1d1f"/>
+          <path d="M212 215c0-27 21-44 46-44s46 17 46 44z" fill="#1d1d1f"/>
+          <!-- 슬라이드 -->
+          <rect x="333" y="86" width="127" height="70" rx="8" fill="#fff" stroke="#1d1d1f" stroke-width="2"/>
+          <rect x="345" y="100" width="68" height="8" rx="4" fill="#1d1d1f"/>
+          <rect x="345" y="116" width="96" height="6" rx="3" fill="#c8c8c8"/>
+          <rect x="345" y="130" width="82" height="6" rx="3" fill="#c8c8c8"/>
+          <!-- 참가자 -->
+          <rect x="333" y="168" width="38" height="38" rx="8" fill="#c8c8c8" stroke="#1d1d1f" stroke-width="2"/>
+          <rect x="378" y="168" width="38" height="38" rx="8" fill="#9a9a9a" stroke="#1d1d1f" stroke-width="2"/>
+          <rect x="423" y="168" width="38" height="38" rx="8" fill="#c8c8c8" stroke="#1d1d1f" stroke-width="2"/>
+          <circle cx="352" cy="182" r="7" fill="#fff"/><path d="M340 199c0-7 5-11 12-11s12 4 12 11z" fill="#fff"/>
+          <circle cx="397" cy="182" r="7" fill="#fff"/><path d="M385 199c0-7 5-11 12-11s12 4 12 11z" fill="#fff"/>
+          <circle cx="442" cy="182" r="7" fill="#fff"/><path d="M430 199c0-7 5-11 12-11s12 4 12 11z" fill="#fff"/>
+          <!-- 노트북 하단 -->
+          <path d="M110 262h420l-18 22H128z" fill="#fff" stroke="#1d1d1f" stroke-width="3" stroke-linejoin="round"/>
+          <!-- 말풍선 -->
+          <rect x="42" y="84" width="96" height="44" rx="12" fill="#fff" stroke="#1d1d1f" stroke-width="2.5"/>
+          <rect x="56" y="98" width="54" height="7" rx="3.5" fill="#1d1d1f"/>
+          <rect x="56" y="111" width="38" height="7" rx="3.5" fill="#c8c8c8"/>
+          <rect x="504" y="150" width="92" height="44" rx="12" fill="#fff" stroke="#1d1d1f" stroke-width="2.5"/>
+          <rect x="518" y="164" width="52" height="7" rx="3.5" fill="#1d1d1f"/>
+          <rect x="518" y="177" width="34" height="7" rx="3.5" fill="#c8c8c8"/>
+          <!-- LIVE -->
+          <rect x="176" y="76" width="48" height="20" rx="10" fill="#1d1d1f"/>
+          <circle cx="189" cy="86" r="3.5" fill="#fff"/>
+          <text x="197" y="90" font-size="10" font-weight="700" fill="#fff" font-family="sans-serif">LIVE</text>
+        </svg>
       </div>
       <div class="pad">
         <span class="tag">무료 온라인 웨비나</span>
